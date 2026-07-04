@@ -11,6 +11,7 @@
 <meta property="og:url" content="https://getorb.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="icon.png">
+<meta name="theme-color" content="#070a12">
 <link rel="preload" as="image" href="orb_hero.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +95,7 @@
   .r.on { opacity: 1; transform: none; }
 
   /* ── receipts ── */
-  .cards { display: grid; gap: 14px; margin-top: 46px; max-width: 560px; }
+  .cards { display: grid; gap: 14px; margin: 46px auto 0; max-width: 560px; }
   .card {
     background: linear-gradient(180deg, rgba(32,36,46,.9), rgba(24,27,36,.9));
     border: 1px solid rgba(255,255,255,.07); border-radius: 22px;
@@ -108,12 +109,16 @@
   .card .b { color: #d9e1ef; font-size: 15px; line-height: 1.5; }
   .card:nth-child(2) { margin-left: 26px; } .card:nth-child(3) { margin-left: 8px; }
 
-  /* below the hero, words own the page: solid canvas so text never fights particles */
+  /* below the hero the words lead — near-solid canvas, the dimmed orb ghosts
+     through just enough to keep the page alive (scroll also fades the canvas) */
   main {
     position: relative; z-index: 2;
-    background: linear-gradient(180deg, rgba(7,10,18,0) 0, var(--canvas) 140px);
+    background: linear-gradient(180deg, rgba(7,10,18,0) 0, rgba(7,10,18,.9) 140px);
   }
   main section + section { border-top: 1px solid var(--hair); }
+  ::selection { background: rgba(76,168,232,.35); }
+  :focus-visible { outline: 2px solid rgba(76,168,232,.6); outline-offset: 2px; }
+  .promise { margin-top: 14px; font-size: 12.5px; color: var(--faint); }
 
   /* ── manifesto ── */
   .manifesto { text-align: center; }
@@ -167,6 +172,7 @@
   <span class="links">
     <a href="https://ninjahawk.github.io/Orb-Wiki/">Docs</a>
     <a href="https://github.com/getorb">GitHub</a>
+    <a href="#notify" style="color:var(--blue)">Get notified</a>
   </span>
 </nav>
 
@@ -185,6 +191,7 @@
     <input type="email" name="email" required placeholder="you@example.com" aria-label="Email address">
     <button type="submit">Get the launch email</button>
   </form>
+  <div class="promise">One email at launch. Nothing else.</div>
 </div>
 
 <main>
@@ -200,17 +207,11 @@
   </div>
 </section>
 
-<section class="center">
-  <div class="r"><div class="kicker">One presence, everywhere</div>
-  <h2>Your phone. Your computer. <em>One assistant.</em></h2>
-  <p class="lead" style="margin-left:auto;margin-right:auto">Ask for real work from anywhere and your own machine does it — then the receipt lands in your pocket. Run it on hardware you own, powered by whichever AI you choose.</p></div>
-</section>
-
 <section class="manifesto">
   <div class="r">
     <div class="kicker">Yours, actually</div>
     <div class="quote">"It can't be built in <span class="hl">someone else's cloud.</span>"</div>
-    <p class="lead">An assistant this close to your life only works if it's yours. <strong>No account. No developer servers — nothing of ours could read your data, because nothing of ours exists.</strong> Run the free, open-source Orb server on a computer you own, choose the AI engine that powers it, and name it what you like.</p>
+    <p class="lead">An assistant this close to your life only works if it's yours. <strong>No account. No developer servers — nothing of ours could read your data, because nothing of ours exists.</strong> Run the free, open-source Orb server on a computer you own and your phone becomes its remote: ask for real work from anywhere, and the receipt lands in your pocket. Choose the AI engine that powers it. Name it what you like.</p>
   </div>
   <div class="pillars">
     <div class="pillar r"><h3>Own it</h3><p>Your hardware, your data, your assistant. Self-host and nothing ever leaves machines you control.</p></div>
@@ -288,6 +289,18 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); }
 }), { threshold: 0.18 });
 document.querySelectorAll(".r").forEach(n => io.observe(n));
+
+// dim the orb as the page scrolls — present, never competing with the words
+const orbCanvas = document.getElementById("orbc");
+let dimTick = false;
+addEventListener("scroll", () => {
+  if (dimTick) return; dimTick = true;
+  requestAnimationFrame(() => {
+    const f = Math.min(1, scrollY / (innerHeight * 0.9));
+    orbCanvas.style.opacity = String(1 - f * 0.72);   // floor at ~0.28 — still breathing
+    dimTick = false;
+  });
+}, { passive: true });
 
 if (new URLSearchParams(location.search).has("joined")) {
   document.getElementById("joined").style.display = "block";
