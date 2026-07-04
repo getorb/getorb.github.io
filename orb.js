@@ -236,7 +236,9 @@ export function createOrb(canvas) {
     surge *= Math.pow(0.93, dts);
     surgeTimer -= dt;
     if (surgeTimer <= 0) {
-      surge = Math.max(surge, 0.45 + Math.random() * 0.4);
+      // half the app's surge amplitude — full spikes over the hero text read
+      // as brightness flicker rather than a passing thought
+      surge = Math.max(surge, (0.45 + Math.random() * 0.4) * 0.5);
       surgeTimer = 11 + Math.random() * 15 - restless * 6;
     }
 

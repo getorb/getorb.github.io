@@ -275,14 +275,16 @@ let li = 0;
   for (;;) {
     const text = LINES[li % LINES.length]; li++;
     el.textContent = "";
-    orb?.setState("thinking");
-    await new Promise(r => setTimeout(r, 2600));
+    // stay in the listening↔speaking band (0.95–1.15 brightness) — cycling
+    // down to full idle read as "too bright then too dim" pulsing
+    orb?.setState("listening");
+    await new Promise(r => setTimeout(r, 2400));
     orb?.setState("speaking");
     if (reduced) el.textContent = text;
     else for (const ch of text) { el.textContent += ch; await new Promise(r => setTimeout(r, 30)); }
     await new Promise(r => setTimeout(r, 4200));
-    orb?.setState("idle");
-    await new Promise(r => setTimeout(r, 2600));
+    orb?.setState("listening");
+    await new Promise(r => setTimeout(r, 2400));
   }
 })();
 
