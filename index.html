@@ -293,6 +293,9 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 }), { threshold: 0.18 });
 document.querySelectorAll(".r").forEach(n => io.observe(n));
 
+if (new URLSearchParams(location.search).has("snap"))
+  document.documentElement.style.scrollBehavior = "auto";
+
 // dim the orb as the page scrolls — present, never competing with the words
 const orbCanvas = document.getElementById("orbc");
 let dimTick = false;
