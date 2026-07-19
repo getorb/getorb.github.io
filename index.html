@@ -163,6 +163,80 @@
   }
   .store svg { width: 17px; height: 17px; fill: currentColor; }
 
+  /* ── hero pill ── */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px;
+    padding: 7px 16px; border-radius: 999px; font-size: 13px; font-weight: 550;
+    color: var(--ink); letter-spacing: .02em;
+    background: rgba(76,168,232,.10); border: 1px solid rgba(76,168,232,.32);
+  }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #46d68c;
+    box-shadow: 0 0 10px rgba(70,214,140,.9); }
+
+  /* ── product shots ── */
+  .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 52px; }
+  .shot { border-radius: 26px; overflow: hidden; border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 30px 80px rgba(0,0,0,.55);
+    transition: transform .5s cubic-bezier(.2,.6,.2,1); }
+  .shot img { width: 100%; display: block; }
+  .shot:nth-child(1) { transform: rotate(-1.6deg) translateY(10px); }
+  .shot:nth-child(3) { transform: rotate(1.6deg) translateY(10px); }
+  .shot:hover { transform: translateY(-8px); }
+  @media (max-width: 720px) {
+    .shots { display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+      padding-bottom: 14px; margin-left: -24px; margin-right: -24px;
+      padding-left: 24px; padding-right: 24px; }
+    .shot { flex: 0 0 72vw; scroll-snap-align: center; transform: none !important; }
+  }
+
+  /* ── how it works ── */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 50px; text-align: left; }
+  .step { padding: 26px 24px; border-radius: 18px;
+    background: rgba(255,255,255,.025); border: 1px solid var(--hair); }
+  .step .n { display: inline-flex; width: 30px; height: 30px; border-radius: 9px;
+    align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+    color: var(--blue); background: rgba(76,168,232,.12); margin-bottom: 14px; }
+  .step h3 { font-size: 16.5px; font-weight: 600; margin-bottom: 8px; }
+  .step p { color: var(--dim); font-size: 14.5px; line-height: 1.7; }
+  .step a { color: var(--blue); text-decoration: none; }
+
+  /* ── open source ── */
+  .oss {
+    margin-top: 52px; border-radius: 22px; text-align: left;
+    background: linear-gradient(180deg, rgba(22,27,40,.85), rgba(14,18,29,.9));
+    border: 1px solid rgba(255,255,255,.08); padding: 34px clamp(22px, 4vw, 40px);
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+  }
+  .oss .row { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between; }
+  .oss h3 { font-size: 21px; font-weight: 650; margin-bottom: 8px; }
+  .oss p { color: var(--dim); font-size: 14.5px; line-height: 1.7; max-width: 52ch; }
+  .oss code {
+    display: inline-block; margin-top: 16px; padding: 12px 18px; border-radius: 12px;
+    background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.09);
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 13.5px;
+    color: #9fd2f5; white-space: nowrap; overflow-x: auto; max-width: 100%;
+  }
+  .oss .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .oss .btn {
+    padding: 12px 22px; border-radius: 13px; text-decoration: none; font-weight: 600;
+    font-size: 14.5px; border: 1px solid rgba(255,255,255,.16); color: var(--ink);
+  }
+  .oss .btn.solid { background: linear-gradient(180deg, #5cb4f2, #3a90d4);
+    color: #04121f; border: 0; }
+
+  /* ── FAQ ── */
+  .faq { max-width: 720px; margin: 46px auto 0; text-align: left; }
+  .faq details { border-bottom: 1px solid var(--hair); }
+  .faq summary {
+    cursor: pointer; list-style: none; padding: 20px 4px; font-weight: 600;
+    font-size: 16px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--blue); font-size: 20px; font-weight: 400; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq .a { padding: 0 4px 22px; color: var(--dim); font-size: 15px; line-height: 1.75; }
+  .faq .a a { color: var(--blue); text-decoration: none; }
+
   footer { text-align: center; padding: 56px 24px 78px; color: var(--faint); font-size: 13.5px; }
   footer nav2, footer .fl { display: block; margin-bottom: 14px; }
   footer a { color: var(--dim); text-decoration: none; margin: 0 13px; }
@@ -190,6 +264,7 @@
 <div class="hero">
   <img class="orbfallback" src="orb_hero.png" alt="Orb">
   <div style="flex:1; min-height: 30svh"></div>
+  <div class="pill"><span class="dot"></span>Live on the App Store — free</div>
   <h1>The AI assistant that <em>talks first.</em></h1>
   <div class="say"><span id="line"></span><span class="caret"></span></div>
   <div class="whisper">— Orb, before you asked anything</div>
@@ -223,6 +298,73 @@
     <div class="pillar r"><h3>Own it</h3><p>Your hardware, your data, your assistant. Self-host and nothing ever leaves machines you control.</p></div>
     <div class="pillar r"><h3>Any AI inside</h3><p>Swap the engine anytime — Orb's personality, memory, and voice stay put.</p></div>
     <div class="pillar r"><h3>Name it</h3><p>It's not our brand talking to you. Build the assistant you've wanted since the movies.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="r" style="text-align:center">
+    <div class="kicker">The app</div>
+    <h2 style="margin:0 auto">See it <em>think.</em></h2>
+    <p class="lead" style="margin-left:auto;margin-right:auto">The morning brief before you've said a word. The catches you'd have missed. Every agent working for you, streaming live from your own machine.</p>
+  </div>
+  <div class="shots">
+    <div class="shot r"><img src="shots/shot_brief.webp" alt="Orb's morning brief — it talks first" loading="lazy" width="480" height="1043"></div>
+    <div class="shot r"><img src="shots/shot_catches.webp" alt="Lock-screen catches — unpushed work, expiring codes, buried replies" loading="lazy" width="480" height="1043"></div>
+    <div class="shot r"><img src="shots/shot_sessions.webp" alt="Watch every agent work, live from your PC" loading="lazy" width="480" height="1043"></div>
+  </div>
+</section>
+
+<section>
+  <div class="r" style="text-align:center">
+    <div class="kicker">How it works</div>
+    <h2 style="margin:0 auto">Powerful alone. <em>Yours entirely</em> with a server.</h2>
+  </div>
+  <div class="steps">
+    <div class="step r"><span class="n">1</span><h3>Download the app</h3><p>Works out of the box — a private, on-device AI with no account and no sign-in. <a href="https://apps.apple.com/us/app/orb-ai/id6776376035">Free on the App Store</a>.</p></div>
+    <div class="step r"><span class="n">2</span><h3>Add your own server</h3><p>Optional: run the free, open-source Orb server on a computer you own. One copy-paste setup, about 15 minutes. <a href="https://nathanlangley.dev/Orb-Wiki/self-hosting.html">The walkthrough</a>.</p></div>
+    <div class="step r"><span class="n">3</span><h3>Talk from anywhere</h3><p>Your phone becomes the remote. Ask for real work, carry on with your day — the receipt lands in your pocket when it's done.</p></div>
+  </div>
+  <div class="oss r">
+    <div class="row">
+      <div>
+        <h3>The brain is open source</h3>
+        <p>The entire server — voice loop, agent, proactive engine, the mind — is MIT-licensed and yours to read, run, and change. No account, no telemetry, no cloud of ours.</p>
+        <code>git clone https://github.com/getorb/Orb-Backend</code>
+      </div>
+      <div class="btns">
+        <a class="btn solid" href="https://github.com/getorb/Orb-Backend">View on GitHub</a>
+        <a class="btn" href="https://nathanlangley.dev/Orb-Wiki/self-hosting.html">Setup guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="r" style="text-align:center">
+    <div class="kicker">Questions</div>
+    <h2 style="margin:0 auto">The honest <em>answers.</em></h2>
+  </div>
+  <div class="faq r">
+    <details>
+      <summary>Do I need to pay for an AI subscription?</summary>
+      <div class="a">No. Orb works on-device for free, and you can add free API providers or run a local model on your own hardware. A paid AI account is one option among several, never a requirement.</div>
+    </details>
+    <details>
+      <summary>Is my data private?</summary>
+      <div class="a">On-device data stays on your device. If you self-host, the server is your machine and you only ever connect to your own. There is no developer cloud — nothing of ours could read your data, because nothing of ours exists.</div>
+    </details>
+    <details>
+      <summary>Does it work offline?</summary>
+      <div class="a">Yes — the on-device brain runs with no internet. Features that need the cloud or your PC won't be available offline, and Orb tells you when that's the case instead of failing silently.</div>
+    </details>
+    <details>
+      <summary>What does the server actually add?</summary>
+      <div class="a">Hands and memory: real work on your own computer, proactive briefings, hands-free voice, reminders that survive restarts, and agents you can watch from your phone. It's the difference between an app and a presence. <a href="https://nathanlangley.dev/Orb-Wiki/self-hosting.html">Run it in ~15 minutes</a>.</div>
+    </details>
+    <details>
+      <summary>Will it sound different depending on which AI model runs it?</summary>
+      <div class="a">No. You set Orb's personality once and it holds across every brain — the model is background infrastructure; the personality is constant.</div>
+    </details>
   </div>
 </section>
 
