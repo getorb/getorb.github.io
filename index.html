@@ -128,24 +128,14 @@
   .notify button:hover { background: var(--cy); }
   .joined { display: none; margin-top: 20px; text-align: center; color: var(--cy); font-weight: 700; }
 
-  /* ── carousel ── */
-  .carousel { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory;
-    padding: 44px 24px 18px; margin: 0 -24px;
-    -ms-overflow-style: none; scrollbar-width: none; }
-  .carousel::-webkit-scrollbar { display: none; }
-  .cshot { flex: 0 0 min(300px, 74vw); scroll-snap-align: center; border-radius: 26px;
-    overflow: hidden; border: 1px solid var(--line);
-    box-shadow: 0 26px 70px rgba(0,0,0,.6); transition: transform .3s; }
-  .cshot:hover { transform: scale(1.03); }
-  .cnav { text-align: center; color: var(--faint); font-size: 13px; margin-top: 8px; }
-
   /* ── open-source CTA (career-block pattern) ── */
   .build { position: relative; overflow: hidden; border-radius: 28px;
-    background: url("og.png") right -80px center / 640px no-repeat, linear-gradient(100deg, #0c1120, #090c15);
+    background: linear-gradient(100deg, #0c1120, #090c15);
     border: 1px solid var(--line); padding: clamp(36px, 6vw, 64px);
     display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
-  .build::after { content: ""; position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(0,0,0,.25), transparent 55%); pointer-events: none; }
+  .build::after { content: ""; position: absolute; top: -40%; right: -12%;
+    width: 560px; height: 560px; pointer-events: none;
+    background: radial-gradient(circle, rgba(76,201,240,.14), transparent 62%); }
   .build > * { position: relative; z-index: 1; }
   .build h2 { max-width: 16ch; text-align: left; }
   .build p { margin-top: 14px; color: var(--dim); font-size: 15.5px; line-height: 1.75; max-width: 46ch; }
@@ -171,9 +161,9 @@
     <a class="brand" href="/"><img src="icon.png" alt="">Orb</a>
     <nav class="navlinks">
       <a href="#news">News</a>
-      <a href="#shots">Screenshots</a>
       <a href="https://nathanlangley.dev/Orb-Wiki/self-hosting.html">Self-host</a>
       <a href="https://nathanlangley.dev/Orb-Wiki/">Docs</a>
+      <a href="https://github.com/getorb/Orb-Backend">GitHub</a>
     </nav>
     <a class="navbtn" href="https://apps.apple.com/us/app/orb-ai/id6776376035">Download</a>
   </div>
@@ -254,23 +244,6 @@
   </div>
 </section>
 
-<section id="shots">
-  <div class="wrap">
-    <div class="shead r"><h2 class="caps">See it in action</h2></div>
-    <p class="slead r">Real screens from the app — the morning brief, the catches, the receipts, the live feed of your own machine working for you.</p>
-  </div>
-  <div class="wrap">
-    <div class="carousel r">
-      <div class="cshot"><img src="shots/c1.webp" alt="It talks first — the morning brief" width="480" height="1043"></div>
-      <div class="cshot"><img src="shots/c2.webp" alt="Catches what you'd miss" width="480" height="1043" loading="lazy"></div>
-      <div class="cshot"><img src="shots/c3.webp" alt="Your computer, in your pocket" width="480" height="1043" loading="lazy"></div>
-      <div class="cshot"><img src="shots/c4.webp" alt="Just say it — it happens" width="480" height="1043" loading="lazy"></div>
-      <div class="cshot"><img src="shots/c5.webp" alt="Watch it work, live" width="480" height="1043" loading="lazy"></div>
-    </div>
-    <div class="cnav">← drag →</div>
-  </div>
-</section>
-
 <section>
   <div class="wrap">
     <div class="build r">
@@ -298,7 +271,7 @@
       <a href="privacy.html">Privacy</a>
       <a href="https://nathanlangley.dev/Orb-Wiki/">Support</a>
     </div>
-    <div class="legal">© 2026 Nathan Langley · Made in North Carolina<br>
+    <div class="legal">© 2026 Nathan Langley<br>
       Orb runs on your hardware. No account, no developer cloud, no telemetry.</div>
   </div>
 </footer>
