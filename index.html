@@ -101,7 +101,7 @@
   .ncard { background: var(--card); border: 1px solid var(--line); border-radius: 22px;
     overflow: hidden; transition: transform .3s, border-color .3s; }
   .ncard:hover { transform: translateY(-6px) scale(1.01); border-color: var(--line2); }
-  .ncard img { width: 100%; aspect-ratio: 40/21; object-fit: cover; }
+  .ncard img { width: 100%; height: clamp(200px, 30vw, 280px); object-fit: cover; }
   .ncard .body { padding: 22px 24px 26px; }
   .ncard .k { font-size: 12px; font-weight: 700; letter-spacing: .18em; color: var(--cy);
     text-transform: uppercase; margin-bottom: 10px; }
@@ -194,7 +194,7 @@
 <section id="news">
   <div class="wrap">
     <div class="shead r"><h2 class="caps">Orb News</h2></div>
-    <p class="slead r">Orb is a proactive AI assistant that reaches out before you ask. Free app, open-source server — it all runs on hardware you own.</p>
+    <p class="slead r">Orb is an iPhone assistant that messages you first — your schedule, the email you missed, the deadline tonight. Connect your PC and it'll do real work for you and report back.</p>
     <div class="news">
       <a class="ncard r" href="https://apps.apple.com/us/app/orb-ai/id6776376035">
         <img src="shots/news_live.webp" alt="Orb key art" loading="lazy" width="720" height="378">
